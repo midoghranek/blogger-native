@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "blogger-app",
-    "slug": "blogger-app",
+    "name": "Blogger Native",
+    "slug": "blogger-native",
     "platforms": [
       "ios",
       "android",
@@ -23,6 +23,8 @@
     ],
     "ios": {
       "supportsTablet": true
-    }
+    },
+    "description": "React native app for blogger.com",
+    "githubUrl": "https://github.com/midoghranek/blogger-native"
   }
 }
