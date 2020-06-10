@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useEffect, useState, useMemo, Fragment } from "react";
 import {
   ActivityIndicator,
   View,
@@ -13,7 +13,7 @@ import Card from "../components/Card";
 export default Posts = ({ navigation }) => {
   const [isLoading, setLoading] = useState(true);
 
-  const [currentTag, setCurrentTag] = useState("");
+  const [currentTag, setCurrentTag] = useState("Recent");
   const [tagActive, setTagActive] = useState(false);
   const [labels, setLabels] = useState([]);
 
@@ -82,6 +82,7 @@ export default Posts = ({ navigation }) => {
                   onPress={() => {
                     if (item === "Recent") {
                       setTagActive(false);
+                      setCurrentTag("Recent");
                     } else if (currentTag !== item) {
                       setPostsLoading(true);
                       setCurrentTag(item);
@@ -89,7 +90,20 @@ export default Posts = ({ navigation }) => {
                     }
                   }}
                 >
-                  <Text style={styles.label}>{item}</Text>
+                  <Text
+                    style={[
+                      styles.label,
+                      item === currentTag
+                        ? {
+                            color: "#38c",
+                            borderBottomColor: "#38c",
+                            borderBottomWidth: 1,
+                          }
+                        : "",
+                    ]}
+                  >
+                    {item}
+                  </Text>
                 </TouchableWithoutFeedback>
               )}
               keyExtractor={(item) => item}
@@ -98,10 +112,12 @@ export default Posts = ({ navigation }) => {
           {postsLoading ? (
             <ActivityIndicator style={styles.loading} size="large" />
           ) : (
-            <Card
-              navigation={navigation}
-              posts={tagActive ? tagPosts : posts}
-            />
+            <React.Fragment>
+              <Card
+                navigation={navigation}
+                posts={tagActive ? tagPosts : posts}
+              />
+            </React.Fragment>
           )}
         </View>
       )}
@@ -126,8 +142,7 @@ const styles = StyleSheet.create({
   },
   label: {
     color: "#999",
-    fontSize: 15,
-    fontWeight: "bold",
+    fontSize: 14,
     paddingLeft: 20,
     paddingRight: 20,
     paddingTop: 15,

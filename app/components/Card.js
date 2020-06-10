@@ -66,9 +66,7 @@ export default function Card({ navigation, posts }) {
 const cardReduis = 20;
 
 const styles = StyleSheet.create({
-  postsBox: {
-    paddingTop: 20,
-  },
+  postsBox: {},
   post: {
     marginBottom: 20,
     marginRight: 15,
